@@ -40,6 +40,23 @@
     </div>
   </div>
 
+  <!-- ============ LOGOS BAR ============ -->
+  <div class="logos-bar">
+    <div class="logos-label">Past work has shown up at</div>
+    <div class="logos-row">
+      <span class="logo">Ahrefs</span>
+      <span class="logo">Disney</span>
+      <span class="logo">Marvel</span>
+      <span class="logo">YETI</span>
+      <span class="logo">The Hustle</span>
+      <span class="logo">Ben &amp; Jerry's</span>
+      <span class="logo">NOCD</span>
+      <span class="logo">Hyros</span>
+      <span class="logo">Monograph</span>
+      <span class="logo">RocketReach</span>
+    </div>
+  </div>
+
   <!-- ============ PRIMARY SUBSCRIBE CTA ============ -->
   <div class="optin" id="subscribe">
     <div class="optin-lead">The Weekly Letter</div>
@@ -64,7 +81,7 @@
 
     <div class="project-grid">
 
-      <div class="project-tile">
+      <div class="project-tile" data-category="sg-product">
         <div class="project-name">Lead Magnet Wizard</div>
         <div class="project-desc">A tool that analyzes a business and tells you what interactive lead magnet would actually convert for them.</div>
         <div class="project-meta">
@@ -74,7 +91,7 @@
         </div>
       </div>
 
-      <div class="project-tile">
+      <div class="project-tile" data-category="sg-product">
         <div class="project-name">Pipegrind</div>
         <div class="project-desc">Daily outreach + AI lead enrichment for solo operators running their own pipelines.</div>
         <div class="project-meta">
@@ -84,7 +101,7 @@
         </div>
       </div>
 
-      <div class="project-tile">
+      <div class="project-tile" data-category="sg-internal">
         <div class="project-name">Project Big Board</div>
         <div class="project-desc">A task management system for tiny teams — daily prioritization, project rollups, and a journal layer baked in.</div>
         <div class="project-meta">
@@ -94,7 +111,7 @@
         </div>
       </div>
 
-      <div class="project-tile">
+      <div class="project-tile" data-category="sg-product">
         <div class="project-name">LinkedIn Audit</div>
         <div class="project-desc">An audit for founder LinkedIn profiles — what's working, what to fix, what to publish next. Renaming soon.</div>
         <div class="project-meta">
@@ -104,7 +121,7 @@
         </div>
       </div>
 
-      <div class="project-tile">
+      <div class="project-tile" data-category="sg-product">
         <div class="project-name">Positioning Analyst</div>
         <div class="project-desc">A tool that reads a company's website and scores their positioning across the dimensions buyers actually care about.</div>
         <div class="project-meta">
@@ -113,7 +130,7 @@
         </div>
       </div>
 
-      <div class="project-tile">
+      <div class="project-tile" data-category="sg-internal">
         <div class="project-name">Stick &amp; Grow content platform</div>
         <div class="project-desc">The internal system I built to run founder-led content programs for B2B SaaS clients — research, drafts, calendar, brand voice, all in one place.</div>
         <div class="project-meta">
@@ -123,7 +140,7 @@
         </div>
       </div>
 
-      <div class="project-tile">
+      <div class="project-tile" data-category="personal">
         <div class="project-name">Dreamkeeper</div>
         <div class="project-desc">A personal dream journal with multi-lens AI analysis and cross-dream pattern detection. The first of my non-S&amp;G experiments.</div>
         <div class="project-meta">
@@ -133,7 +150,7 @@
         </div>
       </div>
 
-      <div class="project-tile">
+      <div class="project-tile" data-category="personal">
         <div class="project-name">Outcrop</div>
         <div class="project-desc">A junior mining intelligence platform — newsletter and database covering drill results from public exploration companies.</div>
         <div class="project-meta">
@@ -205,6 +222,32 @@
   </footer>
 
 </div>
+
+<script>
+  // Gentle fade-in-up for project tiles as they scroll into view.
+  // Respects prefers-reduced-motion.
+  (function () {
+    var tiles = document.querySelectorAll('.project-tile');
+    if (!tiles.length) return;
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || !('IntersectionObserver' in window)) {
+      tiles.forEach(function (t) { t.classList.add('in-view'); });
+      return;
+    }
+    tiles.forEach(function (t, i) {
+      t.style.animationDelay = (i * 70) + 'ms';
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    tiles.forEach(function (t) { io.observe(t); });
+  })();
+</script>
 
 </body>
 </html>

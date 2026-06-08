@@ -38,7 +38,7 @@
   <section>
     <div class="project-grid">
 
-      <div class="project-tile">
+      <div class="project-tile" data-category="sg-product">
         <div class="project-name">Lead Magnet Wizard</div>
         <div class="project-desc">
           Most lead magnets fail because they're built before anyone asks whether the audience even wants a PDF. Lead Magnet Wizard reads a business, identifies the buyer, and tells you which <em>interactive</em> lead magnet would actually convert — quiz, calculator, audit, scorecard, or otherwise. Built for B2B marketers tired of low-conversion gated downloads.
@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <div class="project-tile">
+      <div class="project-tile" data-category="sg-product">
         <div class="project-name">Pipegrind</div>
         <div class="project-desc">
           A daily-discipline outbound tool for solo operators. Pulls a fresh batch of leads, enriches each one with AI, drafts the first-touch message in your voice, and queues them up for review. Built because most outbound tools assume you have an SDR team — this one assumes you're it.
@@ -62,7 +62,7 @@
         </div>
       </div>
 
-      <div class="project-tile">
+      <div class="project-tile" data-category="sg-internal">
         <div class="project-name">Project Big Board</div>
         <div class="project-desc">
           The task management system I built after every off-the-shelf tool (Asana, Linear, Notion, ClickUp) failed me as a one-person shop running many things at once. Daily prioritization on top, project rollups in the middle, journal layer at the bottom. Single source of truth for what's getting done this week.
@@ -74,7 +74,7 @@
         </div>
       </div>
 
-      <div class="project-tile">
+      <div class="project-tile" data-category="sg-product">
         <div class="project-name">LinkedIn Audit</div>
         <div class="project-desc">
           An audit tool for founder LinkedIn profiles. Reads your last six months of posts, your profile copy, your activity patterns, and tells you what's working, what's not, and what to publish next. Renaming soon — the placeholder name does the tool a disservice.
@@ -86,7 +86,7 @@
         </div>
       </div>
 
-      <div class="project-tile">
+      <div class="project-tile" data-category="sg-product">
         <div class="project-name">Positioning Analyst</div>
         <div class="project-desc">
           A tool that reads a company's website and scores their positioning across seven dimensions buyers actually care about — who it's for, what they're displacing, the problem named, the promise made, the proof shown, and a couple more. The other side of the Sprint: instead of doing the work for someone, the tool tells them where they stand.
@@ -97,7 +97,7 @@
         </div>
       </div>
 
-      <div class="project-tile">
+      <div class="project-tile" data-category="sg-internal">
         <div class="project-name">Stick &amp; Grow content platform</div>
         <div class="project-desc">
           The internal system I built to run founder-led content programs for B2B SaaS clients. Research engine, draft surface, calendar, brand voice library, prospecting layer — all in one place. The thing my whole agency runs on. Not for public sale; it's the leverage that lets one person serve several clients well.
@@ -109,7 +109,7 @@
         </div>
       </div>
 
-      <div class="project-tile">
+      <div class="project-tile" data-category="personal">
         <div class="project-name">Dreamkeeper</div>
         <div class="project-desc">
           A personal dream journal with multi-lens AI analysis (psychoanalytic, neuroscientific, narrative, symbolic — pick your frame) and cross-dream pattern detection over time. Started as a curiosity project. Turned into a tool I actually use most mornings.
@@ -121,7 +121,7 @@
         </div>
       </div>
 
-      <div class="project-tile">
+      <div class="project-tile" data-category="personal">
         <div class="project-name">Outcrop</div>
         <div class="project-desc">
           A junior mining intelligence platform — daily newsletter and searchable database covering drill results, capital raises, and discoveries from public exploration companies. Built because retail investors in this asset class deserve better than scraping press releases at 6am.
@@ -179,6 +179,32 @@
   </footer>
 
 </div>
+
+<script>
+  // Gentle fade-in-up for project tiles as they scroll into view.
+  // Respects prefers-reduced-motion.
+  (function () {
+    var tiles = document.querySelectorAll('.project-tile');
+    if (!tiles.length) return;
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || !('IntersectionObserver' in window)) {
+      tiles.forEach(function (t) { t.classList.add('in-view'); });
+      return;
+    }
+    tiles.forEach(function (t, i) {
+      t.style.animationDelay = (i * 70) + 'ms';
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    tiles.forEach(function (t) { io.observe(t); });
+  })();
+</script>
 
 </body>
 </html>
