@@ -272,8 +272,23 @@ section:last-child { margin-bottom: 0; }
 .optin-btn:disabled { opacity: 0.55; cursor: not-allowed; }
 .optin-btn:disabled:hover { opacity: 0.55; }
 .optin-input:disabled { opacity: 0.6; cursor: not-allowed; }
+.optin-honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.optin-status {
+  min-height: 20px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--light);
+}
+.optin-status.is-success { color: #b8d7bd; }
+.optin-status.is-error { color: #f0b8ae; }
 .optin-fineprint {
-  margin-top: 16px;
+  margin-top: 4px;
   font-size: 13px;
   color: var(--light);
 }

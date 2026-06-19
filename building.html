@@ -142,11 +142,13 @@
     <div class="optin-body">
       I write about what it takes to build, ship, and operate all of the above from a one-person shop. Subscribe and a short email shows up every day.
     </div>
-    <form class="optin-form" action="#" method="post" onsubmit="event.preventDefault(); return false;">
-      <input class="optin-input" type="email" placeholder="Newsletter launches soon" disabled aria-disabled="true" />
-      <button class="optin-btn" type="button" disabled aria-disabled="true">Coming soon</button>
+    <form class="optin-form" action="/api/subscribe" method="post">
+      <input class="optin-input" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+      <input class="optin-honeypot" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <button class="optin-btn" type="submit">Subscribe</button>
     </form>
-    <div class="optin-fineprint">Free. The first email goes out soon — bookmark the page or <a href="https://linkedin.com/in/danmcdermott" style="color: inherit; text-decoration: underline;">find me on LinkedIn</a> in the meantime.</div>
+    <div class="optin-status" role="status" aria-live="polite"></div>
+    <div class="optin-fineprint">Free. Unsubscribe anytime.</div>
   </div>
 
   <!-- ============ FOOTER ============ -->
@@ -205,6 +207,8 @@
     tiles.forEach(function (t) { io.observe(t); });
   })();
 </script>
+
+<script src="subscribe.js"></script>
 
 </body>
 </html>

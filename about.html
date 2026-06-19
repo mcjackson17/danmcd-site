@@ -54,11 +54,13 @@
     <div class="optin-body">
       A short email each day on building, shipping, and operating as a solo or tiny team.
     </div>
-    <form class="optin-form" action="#" method="post" onsubmit="event.preventDefault(); return false;">
-      <input class="optin-input" type="email" placeholder="Newsletter launches soon" disabled aria-disabled="true" />
-      <button class="optin-btn" type="button" disabled aria-disabled="true">Coming soon</button>
+    <form class="optin-form" action="/api/subscribe" method="post">
+      <input class="optin-input" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+      <input class="optin-honeypot" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <button class="optin-btn" type="submit">Subscribe</button>
     </form>
-    <div class="optin-fineprint">Free. The first email goes out soon — bookmark the page or <a href="https://linkedin.com/in/danmcdermott" style="color: inherit; text-decoration: underline;">find me on LinkedIn</a> in the meantime.</div>
+    <div class="optin-status" role="status" aria-live="polite"></div>
+    <div class="optin-fineprint">Free. Unsubscribe anytime.</div>
   </div>
 
   <!-- ============ WORKSHOP BLOCK ============ -->
@@ -108,5 +110,6 @@
 
 </div>
 
+<script src="subscribe.js"></script>
 </body>
 </html>
